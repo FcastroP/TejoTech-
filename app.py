@@ -4,7 +4,6 @@ import numpy as np
 from flask import Flask, render_template, request, redirect, url_for
 from werkzeug.utils import secure_filename
 
-# ✅ Crear solo una instancia de Flask
 app = Flask(__name__)
 
 # 📁 Configuración de uploads
@@ -72,6 +71,7 @@ def procesar_imagen(path):
     return resultado, ganador, "uploads/resultado.jpg", dist_red_cm, dist_blue_cm
 
 
+# 🏠 Página principal
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
@@ -105,6 +105,7 @@ def index():
     return render_template("index.html", ranking=ranking)
 
 
+# 🏁 Página de resultado
 @app.route("/resultado/<filename>/<jugador>")
 def resultado(filename, jugador):
     path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
@@ -120,7 +121,13 @@ def resultado(filename, jugador):
                            ranking=ranking, imagen=imagen, dist_red=dist_red, dist_blue=dist_blue)
 
 
-# ✅ Render usa el puerto de entorno
+# 🏆 NUEVA RUTA: Ver Ranking
+@app.route("/ranking")
+def ver_ranking():
+    return render_template("ranking.html", ranking=ranking)
+
+
+# ✅ Render usa el puerto del entorno
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
