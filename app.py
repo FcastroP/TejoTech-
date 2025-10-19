@@ -165,13 +165,16 @@ def resultado(filename, jugador):
                            dist_blue=dist_blue)
 
 
-@app.route("/ranking")
-def ver_ranking():
-    return render_template("ranking.html", ranking=ranking)
+from flask import Flask, render_template
 
-if __name__ == "__main__":
-    # conexion desde otros dispositivos en la misma red
-    app.run(host="0.0.0.0", port=5000, debug=True)
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('index.html')  # o un texto: return "Hola desde Flask"
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
 
 
 
