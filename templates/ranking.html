@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ranking</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='ranking.css') }}">
+</head>
+<body>
+
+    <img src="{{ url_for('static', filename='img_index/fondo.jpg') }}" class="background-img" alt="Fondo">
+
+    <div class="overlay"></div>
+
+    <div class="container">
+        <h1>Ranking de Jugadores </h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Foto</th>
+                    <th>Nombre</th>
+                    <th>Apuesta</th>
+                    <th>Ganadas</th>
+                    <th>Perdidas</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for jugador, datos in ranking.items() %}
+                <tr>
+                    <td>
+                        {% if datos.foto %}
+                            <img src="{{ url_for('static', filename='uploads/' + datos.foto) }}" alt="Foto de {{ jugador }}">
+                        {% else %}
+                            <span class="sin-foto">Sin foto</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ jugador }}</td>
+                    <td>{{ datos.apuesta }}</td>
+                    <td class="ganadas">{{ datos.ganadas }}</td>
+                    <td class="perdidas">{{ datos.perdidas }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ url_for('index') }}" class="volver">⬅ Volver al inicio</a>
+    </div>
+</body>
+</html>

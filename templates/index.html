@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>TejoTech UL</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+</head>
+<body>
+    <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register("/static/sw.js");
+  }
+</script>
+    <img src="{{ url_for('static', filename='img_index/fondo.jpg') }}" alt="Fondo" class="background-img">
+    <div class="overlay"></div>
+    <div class="container">
+        <img src="{{ url_for('static', filename='img_index/principal.png') }}" class="logo" alt="Universidad Libre">
+        <h1>TEJOTECH</h1>
+
+        <form method="POST" enctype="multipart/form-data" action="/">
+            <label>Nombre del jugador:</label>
+            <input type="text" name="jugador" required>
+
+            <label>Subir imagen Jugador:</label>
+            <input type="file" name="file.player" accept="image/*" required>
+
+            <label>¿A quién apuestas?</label>
+            <select name="apuesta" required>
+                <option value="Rojo">Rojo 🔴</option>
+                <option value="Azul">Azul 🔵</option>
+            </select>
+
+            <label>Subir imagen:</label>
+            <input type="file" name="file" accept="image/*" required>
+
+            <button type="submit">Enviar</button>
+        </form>
+
+        <a href="{{ url_for('ver_ranking') }}">📊 Ver ranking</a>
+    </div>
+</body>
+</html>
+
+

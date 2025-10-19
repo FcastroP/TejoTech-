@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='result.css') }}">
+</head>
+<body>
+    <img src="{{ url_for('static', filename='img_index/fondo.jpg') }}" class="background-img" alt="Fondo">
+    <div class="overlay"></div>
+    <div class="container">
+
+        <img src="{{ url_for('static', filename='img_index/principal.png') }}" class="logo" alt="Universidad Libre">
+
+        <h1>Resultado de la partida</h1>
+
+        {% if ganador %}
+            <p><strong>Ganador:</strong> {{ ganador }}</p>
+        {% else %}
+            <p><strong>No se pudo determinar el ganador.</strong></p>
+        {% endif %}
+
+        <h3>Distancias a la meta:</h3>
+        <ul>
+            <li><strong>Rojo:</strong> {{ dist_red | round(2) if dist_red else 'No detectado' }} cm</li>
+            <li><strong>Azul:</strong> {{ dist_blue | round(2) if dist_blue else 'No detectado' }} cm</li>
+        </ul>
+
+        <img src="{{ url_for('static', filename=imagen) }}" alt="Resultado">
+
+        <div class="buttons">
+            <a href="{{ url_for('index') }}">⬅ Volver al inicio</a>
+            <a href="{{ url_for('ver_ranking') }}">📊 Ver ranking</a>
+        </div>
+    </div>
+</body>
+</html>
+
+
