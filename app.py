@@ -121,10 +121,10 @@ def resultado(filename, jugador):
                            ranking=ranking, imagen=imagen, dist_red=dist_red, dist_blue=dist_blue)
 
 
-# 🏆 NUEVA RUTA: Ver Ranking
 @app.route("/ranking")
 def ver_ranking():
     return render_template("ranking.html", ranking=ranking)
+
 
 
 # ✅ Render usa el puerto del entorno
